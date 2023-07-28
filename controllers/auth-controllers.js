@@ -2,7 +2,7 @@ import { ctrlWrapper } from "../decorators/index.js";
 
 import jwt from "jsonwebtoken";
 
-// import "dotenv/config";
+import "dotenv/config";
 
 import bcrypt from "bcrypt";
 
