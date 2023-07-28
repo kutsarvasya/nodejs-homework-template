@@ -1,5 +1,6 @@
 import { ctrlWrapper } from "../decorators/index.js";
-import User from "../models/user.js";
+
+import User from "../models/User.js";
 
 import jwt from "jsonwebtoken";
 
@@ -63,6 +64,7 @@ const signout = async (req, res) => {
     message: "Signout success",
   });
 };
+
 export default {
   signup: ctrlWrapper(signup),
   signin: ctrlWrapper(signin),
