@@ -1,4 +1,5 @@
 import { ctrlWrapper } from "../decorators/index.js";
+import User from "../models/user.js";
 
 import jwt from "jsonwebtoken";
 
@@ -7,8 +8,6 @@ import dotenv from "dotenv";
 import bcrypt from "bcrypt";
 
 import { HttpError } from "../helpers/index.js";
-
-import User from "../models/user.js";
 
 dotenv.config();
 
