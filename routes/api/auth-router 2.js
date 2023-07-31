@@ -6,8 +6,7 @@ import authControllers from "../../controllers/auth-controllers.js";
 
 import usersSchemas from "../../Schemas/users-schemas.js";
 
-// import authenticate from "../../middlewares/authenticate.js";
-import { authenticate, upload } from "../../middlewares/index.js";
+import authenticate from "../../middlewares/authenticate.js";
 
 const authRouter = express.Router();
 authRouter.post(
@@ -22,10 +21,4 @@ authRouter.post(
 );
 authRouter.get("/current", authenticate, authControllers.getCurrent);
 authRouter.post("/signout", authenticate, authControllers.signout);
-authRouter.patch(
-  "/avatars",
-  authenticate,
-  upload.single("avatar"),
-  authControllers.updateAvatar
-);
 export default authRouter;
