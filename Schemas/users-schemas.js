@@ -7,6 +7,11 @@ const userSignupSchema = Joi.object({
     .required(),
   subscription: Joi.string().default("starter"),
 });
+const emailSchema = Joi.object({
+  email: Joi.string()
+    .pattern(/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/)
+    .required(),
+});
 
 const userSignInSchema = Joi.object({
   email: Joi.string()
@@ -18,4 +23,5 @@ const userSignInSchema = Joi.object({
 export default {
   userSignupSchema,
   userSignInSchema,
+  emailSchema,
 };

@@ -54,6 +54,7 @@ const signup = async (req, res) => {
     },
   });
 };
+
 const verifyEmail = async (req, res) => {
   const { verificationCode } = req.params;
   console.log(verificationCode);
@@ -67,6 +68,27 @@ const verifyEmail = async (req, res) => {
   });
   res.json({
     message: "Email verify success",
+  });
+};
+const resendVerifyEmail = async (req, res) => {
+  const { email } = req.body;
+  const user = await User.findOne({ email });
+  if (!user) {
+    throw HttpError(400, "email not found");
+  }
+  if (user.verify) {
+    throw HttpError(400, "Verification has already been passed");
+  }
+  const verifyEmail = {
+    from: "TEST <vkutsar89@mail.ru>",
+    to: email,
+    subject: "Verify email",
+    html: `<a target="_blank" href="${BASE_URL}/api/auth/verify/${user.verificationCode}" >Click verify email</a>`,
+  };
+  await mailer(verifyEmail);
+
+  res.json({
+    message: "Verify email send success",
   });
 };
 
@@ -125,6 +147,7 @@ const updateAvatar = async (req, res) => {
 export default {
   signup: ctrlWrapper(signup),
   verifyEmail: ctrlWrapper(verifyEmail),
+  resendVerifyEmail: ctrlWrapper(resendVerifyEmail),
   signin: ctrlWrapper(signin),
   getCurrent: ctrlWrapper(getCurrent),
   signout: ctrlWrapper(signout),
